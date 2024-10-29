@@ -1,0 +1,33 @@
+# APLICACIÓN WEB
+services:
+- type: web
+  name: app_webpy
+  runtime: python
+  repo: https://github.com/OrtaBwana/WebCine
+  plan: free
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: python3 web/app.py
+
+# API REST
+- type: web
+  name: api_rest
+  runtime: python
+  repo: https://github.com/OrtaBwana/ApiRestCine
+  plan: free
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: fastapi run app/main.py
+
+# BASE DE DATOS
+databases:
+- name: CINE_DB
+  databaseName: cine_db_zun9
+  user: cine_db_zun9_user
+  plan: free
+  region: oregon
+  ipAllowList:
+  - source: 0.0.0.0/0
+    description: everywhere
+  postgresMajorVersion: "16"
+version: "1"
